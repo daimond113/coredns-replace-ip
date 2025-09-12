@@ -1,4 +1,4 @@
-module github.com/daimond113/coredns-ip-replace
+module github.com/daimond113/coredns-replace-ip
 
 go 1.24.2
 
