@@ -18,10 +18,6 @@ func setup(c *caddy.Controller) error {
 
 	for c.NextBlock() {
 		for c.NextLine() {
-			if !c.Next() {
-				return plugin.Error("replace-ip", c.ArgErr())
-			}
-
 			source, err := netip.ParseAddr(c.Val())
 
 			if err != nil {
