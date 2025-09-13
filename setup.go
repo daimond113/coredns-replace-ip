@@ -17,25 +17,23 @@ func setup(c *caddy.Controller) error {
 	ips := make(map[netip.Addr]netip.Addr)
 
 	for c.NextBlock() {
-		for c.NextLine() {
-			source, err := netip.ParseAddr(c.Val())
+		source, err := netip.ParseAddr(c.Val())
 
-			if err != nil {
-				return plugin.Error("replace-ip", err)
-			}
-
-			if !c.NextArg() {
-				return plugin.Error("replace-ip", c.ArgErr())
-			}
-
-			destination, err := netip.ParseAddr(c.Val())
-
-			if err != nil {
-				return plugin.Error("replace-ip", err)
-			}
-
-			ips[source] = destination
+		if err != nil {
+			return plugin.Error("replace-ip", err)
 		}
+
+		if !c.NextArg() {
+			return plugin.Error("replace-ip", c.ArgErr())
+		}
+
+		destination, err := netip.ParseAddr(c.Val())
+
+		if err != nil {
+			return plugin.Error("replace-ip", err)
+		}
+
+		ips[source] = destination
 	}
 
 	dnsserver.GetConfig(c).AddPlugin(func(next plugin.Handler) plugin.Handler {

@@ -40,7 +40,7 @@ func (ri ReplaceIp) ServeDNS(ctx context.Context, w dns.ResponseWriter, r *dns.M
 		if cl == response.Denial || cl == response.Error || ty == response.Delegation {
 			return 0, nil
 		} else {
-			return 0, plugin.Error("minimal", fmt.Errorf("unhandled response type %q for %q", ty, nw.Msg.Question[0].Name))
+			return 0, plugin.Error("replace-ip", fmt.Errorf("unhandled response type %q for %q", ty, nw.Msg.Question[0].Name))
 		}
 	}
 
