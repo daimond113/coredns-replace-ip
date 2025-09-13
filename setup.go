@@ -18,7 +18,7 @@ func setup(c *caddy.Controller) error {
 
 	for c.NextBlock() {
 		for c.NextLine() {
-			if !c.NextArg() {
+			if !c.Next() {
 				return plugin.Error("replace-ip", c.ArgErr())
 			}
 
